@@ -1,37 +1,31 @@
-// src/App.jsx
-import React, { useState } from 'react';
-import { useRecipes } from './hooks/useRecipes';
-import { RecipeList } from './components/RecipeList';
+import React from 'react';
+import { MealPlannerProvider } from './context/MealPlannerContext';
+import { Navigation } from './components/Navigation';
+import { PantryInput } from './components/pantry/PantryInput';
+import { WeeklyView } from './components/planner/WeeklyView';
+import { GroceryList } from './components/grocery/GroceryList';
+import { RecipeGrid } from './components/recipes/RecipeGrid';
 
 export default function App() {
-  const [pantry, setPantry] = useState(['tomato', 'onion']);
-  const { recipes, loading, error } = useRecipes(pantry);
-
-  const handleAddIngredient = (item) => {
-    if (item && !pantry.includes(item)) {
-      setPantry([...pantry, item.toLowerCase().trim()]);
-    }
-  };
-
   return (
-    <div className="app-container">
-      <header>
-        <h1>🥗 Intelligent Recipe Finder</h1>
-      </header>
-
-      <main>
-        {/* Simple inline test controller to modify state */}
-        <button onClick={() => handleAddIngredient('garlic')}>
-          Quick Add Garlic
-        </button>
-
-        <p>Active Pantry Items: {pantry.join(', ')}</p>
-
-        {loading && <p>Searching matching database records...</p>}
-        {error && <p className="error">{error}</p>}
+    <MealPlannerProvider>
+      <div className="app-container">
+        <Navigation />
         
-        {!loading && !error && <RecipeList items={recipes} />}
-      </main>
-    </div>
+        <div className="main-layout">
+          {/* Left-Side Controls (Inputs & Output Records) */}
+          <div className="dashboard-grid">
+            <PantryInput />
+            <WeeklyView />
+            <GroceryList />
+          </div>
+
+          {/* Right-Side Dashboard Output Display */}
+          <div>
+            <RecipeGrid />
+          </div>
+        </div>
+      </div>
+    </MealPlannerProvider>
   );
 }
