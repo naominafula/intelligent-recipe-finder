@@ -5,8 +5,11 @@ import { PantryInput } from './components/pantry/PantryInput';
 import { WeeklyView } from './components/planner/WeeklyView';
 import { GroceryList } from './components/grocery/GroceryList';
 import { RecipeGrid } from './components/recipes/RecipeGrid';
+import { useRecipeSearch } from './hooks/UseRecipeSearch';
 
 export default function App() {
+  const { recipes } = useRecipeSearch();
+
   return (
     <MealPlannerProvider>
       <div className="app-container">

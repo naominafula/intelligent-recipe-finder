@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { recipeService } from '../services/recipeService';
-import { useDebounce } from './useDebounce';
+import { useDebounce } from './UseDebounce';
 
 export function useRecipeSearch(ingredients) {
   const [recipes, setRecipes] = useState([]);

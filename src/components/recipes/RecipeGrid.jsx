@@ -1,6 +1,6 @@
 import React from 'react';
 import { usePlanner } from '../../context/MealPlannerContext';
-import { useRecipeSearch } from '../../hooks/useRecipeSearch';
+import { useRecipeSearch } from '../../hooks/UseRecipeSearch';
 import { RecipeCard } from './RecipeCard';
 
 export function RecipeGrid() {
